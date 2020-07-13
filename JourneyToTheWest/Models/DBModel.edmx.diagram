@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fd9ddf9662074de1864955fc9bbe2909" Name="Diagram1">
+        <EntityTypeShape EntityType="JOURNEYTOTHEWESTModel.Admin" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOURNEYTOTHEWESTModel.Cast" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOURNEYTOTHEWESTModel.Equipment" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOURNEYTOTHEWESTModel.EquipmentStatu" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOURNEYTOTHEWESTModel.EquipmentUsingHistory" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOURNEYTOTHEWESTModel.Impersonation" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOURNEYTOTHEWESTModel.RecordHistory" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOURNEYTOTHEWESTModel.Scene" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOURNEYTOTHEWESTModel.sysdiagram" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="JOURNEYTOTHEWESTModel.FK_Impersonation_Cast1" ManuallyRouted="false" />
+        <AssociationConnector Association="JOURNEYTOTHEWESTModel.FK_RecordHistory_Cast1" ManuallyRouted="false" />
+        <AssociationConnector Association="JOURNEYTOTHEWESTModel.FK_Equipment_EquipmentStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="JOURNEYTOTHEWESTModel.FK_EquipmentUsingHistory_Equipment" ManuallyRouted="false" />
+        <AssociationConnector Association="JOURNEYTOTHEWESTModel.FK_EquipmentUsingHistory_Scene" ManuallyRouted="false" />
+        <AssociationConnector Association="JOURNEYTOTHEWESTModel.FK_RecordHistory_Impersonation1" ManuallyRouted="false" />
+        <AssociationConnector Association="JOURNEYTOTHEWESTModel.FK_RecordHistory_Scene" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
