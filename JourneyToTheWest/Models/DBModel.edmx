@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="FullName" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Role" Type="int" />
         </EntityType>
         <EntityType Name="Cast">
@@ -61,7 +61,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DefaultCastId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="RecordHistory">
           <Key>
@@ -78,12 +78,13 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="250" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="StartTime" Type="datetime" />
           <Property Name="EndTime" Type="datetime" />
           <Property Name="Takes" Type="int" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -228,7 +229,7 @@
           </Key>
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FullName" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
           <Property Name="Role" Type="Int32" />
         </EntityType>
         <EntityType Name="Cast">
@@ -285,7 +286,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DefaultCastId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cast" Relationship="Self.FK_Impersonation_Cast1" FromRole="Impersonation" ToRole="Cast" />
           <NavigationProperty Name="RecordHistories" Relationship="Self.FK_RecordHistory_Impersonation1" FromRole="Impersonation" ToRole="RecordHistory" />
         </EntityType>
@@ -315,6 +316,7 @@
           <Property Name="Takes" Type="Int32" />
           <NavigationProperty Name="EquipmentUsingHistories" Relationship="Self.FK_EquipmentUsingHistory_Scene" FromRole="Scene" ToRole="EquipmentUsingHistory" />
           <NavigationProperty Name="RecordHistories" Relationship="Self.FK_RecordHistory_Scene" FromRole="Scene" ToRole="RecordHistory" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -533,6 +535,7 @@
           <EntitySetMapping Name="Scenes">
             <EntityTypeMapping TypeName="JOURNEYTOTHEWESTModel.Scene">
               <MappingFragment StoreEntitySet="Scene">
+                <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

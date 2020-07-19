@@ -27,7 +27,6 @@ namespace JourneyToTheWest.Controllers
             return new SceneDAO().GetSceneById(int.Parse(id));
         }
 
-
         [Route("addNew")]
         [HttpPost]
         public HttpResponseMessage AddNew(Scene scene)
@@ -44,22 +43,18 @@ namespace JourneyToTheWest.Controllers
             var rs = new SceneDAO().UpdateScene(scene);
             return rs == true ? new HttpResponseMessage(HttpStatusCode.OK) : new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
-        [Route("delete")]
+       
         [HttpPost]
-        public HttpResponseMessage Delete(string id)
+        [Route("{id}")]
+
+        public IHttpActionResult Delete([FromUri] int id)
         {
-            int tmp;
-            try
-            {
-                tmp = int.Parse(id);
-            }
-            catch (Exception)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-                throw;
-            }
-            var rs = new SceneDAO().DeleteScene(tmp);
-            return rs == true ? new HttpResponseMessage(HttpStatusCode.OK) : new HttpResponseMessage(HttpStatusCode.BadRequest);
+
+
+            var rs = new SceneDAO().DeleteScene(id);
+            if (rs) return Ok();
+
+            return Conflict();
         }
     }
 }

@@ -79,6 +79,39 @@ namespace JourneyToTheWest.Models.DAOs
                 return list;
             }
         }
+      public List<int?> GetListImpersonation(int sceneId)
+        {
+
+            using (var db = new JOURNEYTOTHEWESTEntities())
+            {
+                List<int?> list = db.RecordHistories
+                        .Where(x => x.SceneId == sceneId)
+                        .Select(y => y.ImpersonationId)
+                        .ToList();
+                return list;
+            }
+        }
+
+        public bool AddNew(RecordHistory rc)
+        {
+            using (var db = new JOURNEYTOTHEWESTEntities())
+            {
+                try
+                {
+                    db.RecordHistories.Add(rc);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                    throw;
+                }
+
+            }
+        }
+      
+
 
     }
 }

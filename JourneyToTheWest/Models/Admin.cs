@@ -16,7 +16,7 @@ namespace JourneyToTheWest.Models
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public int FullName { get; set; }
+        public string FullName { get; set; }
         public Nullable<int> Role { get; set; }
     }
 }

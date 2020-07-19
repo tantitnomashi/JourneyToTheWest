@@ -7,7 +7,18 @@ using System.Web;
 namespace JourneyToTheWest.Models.DAOs
 {
     public class CastDAO
-    {
+    {   
+
+        public Cast CheckLogin(string username, string password)
+        {
+
+            using (var db = new JOURNEYTOTHEWESTEntities())
+            {
+                return db.Casts
+                        .Where(x => x.Username == username && x.Password == password)
+                        .SingleOrDefault();
+            }
+        }
         public List<Cast> GetAllCast()
         {
             using (var db = new JOURNEYTOTHEWESTEntities())

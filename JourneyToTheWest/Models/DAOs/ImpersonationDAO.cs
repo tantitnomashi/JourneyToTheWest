@@ -12,8 +12,7 @@ namespace JourneyToTheWest.Models.DAOs
         {
             using (var db = new JOURNEYTOTHEWESTEntities())
             {
-                return db.Impersonations.Select(x => x)
-                    .ToList();
+                return db.Impersonations.Include(x => x.Cast).ToList();
             }
         }
 

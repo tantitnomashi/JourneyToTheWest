@@ -1,5 +1,6 @@
 ﻿using JourneyToTheWest.Models;
 using JourneyToTheWest.Models.DAOs;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace JourneyToTheWest.Controllers
     public class ImpersonationAPIController : ApiController
     {
 
+      
         [Route("getAll")]
         [HttpGet]
         public List<Impersonation> GetAllImpersonations()
@@ -44,24 +46,19 @@ namespace JourneyToTheWest.Controllers
             var rs = new ImpersonationDAO().UpdateImpersonation(impersonation);
             return rs == true ? new HttpResponseMessage(HttpStatusCode.OK) : new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
-        [Route("delete")]
+        
         [HttpPost]
-        public HttpResponseMessage Delete(string id)
-        {
-            int tmp;
-            try
-            {
-                tmp = int.Parse(id);
-            }
-            catch (Exception)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-                throw;
-            }
-            var rs = new ImpersonationDAO().DeleteImpersonation(tmp);
-            return rs == true ? new HttpResponseMessage(HttpStatusCode.OK) : new HttpResponseMessage(HttpStatusCode.BadRequest);
-        }
+        [Route("{id}")]
 
+        public IHttpActionResult Delete([FromUri] int id)
+        {
+
+            var rs = new ImpersonationDAO().DeleteImpersonation(id);
+
+            if (rs) return Ok();
+
+            return Conflict();
+        }
 
     }
 

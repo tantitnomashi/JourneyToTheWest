@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace JourneyToTheWest.Controllers
 {
@@ -15,16 +16,26 @@ namespace JourneyToTheWest.Controllers
 
         [Route("getAll")]
         [HttpGet]
-        public List<Cast> GetAllCasts()
+        [ResponseType(typeof(List<Cast>))]
+        public IHttpActionResult GetAllCasts()
         {
-            return new CastDAO().GetAllCast();
-        }
-        [Route("getById")]
+            var list = new CastDAO().GetAllCast();
 
+            return Ok(new CastDAO().GetAllCast());
+        }
+
+
+        [Route("getById/{username}")]
         [HttpGet]
-        public Cast GetCastById(string username)
+        [ResponseType(typeof(Cast))]
+
+        public IHttpActionResult GetCastById(string username)
         {
-            return new CastDAO().GetCastById(username);
+            Cast cast = new CastDAO().GetCastById(username);
+            if (cast != null) return Ok(cast);
+
+            return Conflict();
+            
         }
         [Route("addNew")]
         [HttpPost]
@@ -43,15 +54,20 @@ namespace JourneyToTheWest.Controllers
             var rs = new CastDAO().UpdateCast(cast);
             return rs == true ? new HttpResponseMessage(HttpStatusCode.OK) : new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
-        [Route("delete")]
+       
         [HttpPost]
-        public HttpResponseMessage Delete(string username)
+        [Route("{username}")]
+
+        public IHttpActionResult Delete([FromUri] string username)
         {
-          
-            var rs = new CastDAO().DeleteCast(username);
-            return rs == true ? new HttpResponseMessage(HttpStatusCode.OK) : new HttpResponseMessage(HttpStatusCode.BadRequest);
+
+
+           var  rs = new CastDAO().DeleteCast(username);
+            if (rs) return Ok();
+
+            return Conflict();
         }
-        
+
 
     }
 }

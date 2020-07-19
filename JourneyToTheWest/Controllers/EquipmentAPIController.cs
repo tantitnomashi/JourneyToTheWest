@@ -1,7 +1,9 @@
 ﻿using JourneyToTheWest.Models;
+using JourneyToTheWest.Models.ApiDTO;
 using JourneyToTheWest.Models.DAOs;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,19 +15,30 @@ namespace JourneyToTheWest.Controllers
     [RoutePrefix("api/equipment")]
     public class EquipmentAPIController : ApiController
     {
-        [Route("getAllEquipments")]
+        [Route("getAll")]
 
         [HttpGet]
         public List<Equipment> GetAllEquipments()
         {
             return new EquipmentDAO().GetAllEquipment();
         }
-        [Route("getEquipmentById")]
+        [Route("getById")]
 
         [HttpGet]
-        public Equipment GetEquipmentById(string id)
+        public Equipment GetEquipmentById(int id)
         {
-            return new EquipmentDAO().GetEquipmentById(int.Parse(id));
+            return new EquipmentDAO().GetEquipmentById(id);
+        }
+
+
+        [Route("checkQuantity")]
+        [HttpGet]
+        public IHttpActionResult CheckQuantityAvailble(int id, int quantity)
+        {
+            bool rs = new EquipmentDAO().isAvailbleQuantity( id,  quantity);
+            if (rs) return Ok();
+
+            return Conflict();
         }
 
 
@@ -36,8 +49,8 @@ namespace JourneyToTheWest.Controllers
 
               var rs =   new EquipmentDAO().AddNewEquipment(equipment);
              return rs == true ?  new HttpResponseMessage(HttpStatusCode.OK) : new HttpResponseMessage(HttpStatusCode.BadRequest);           
-        } 
-        
+        }
+             
         [Route("update")]
         [HttpPost]
         public HttpResponseMessage Update(Equipment equipment)
@@ -46,22 +59,19 @@ namespace JourneyToTheWest.Controllers
               var rs =   new EquipmentDAO().UpdateEquipment(equipment);
               return rs == true ?  new HttpResponseMessage(HttpStatusCode.OK) : new HttpResponseMessage(HttpStatusCode.BadRequest);           
         } 
-        [Route("delete")]
+      
         [HttpPost]
-        public HttpResponseMessage Delete(string id)
+        [Route("{id}")]
+
+        public IHttpActionResult Delete([FromUri] int id)
         {
-            int tmp;
-            try
-            {
-                tmp = int.Parse(id);
-            }
-            catch (Exception)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-                throw;
-            }
-              var rs = new EquipmentDAO().DeleteEquiptment(tmp);
-              return rs == true ?  new HttpResponseMessage(HttpStatusCode.OK) : new HttpResponseMessage(HttpStatusCode.BadRequest);           
+
+          
+            var rs = new EquipmentDAO().DeleteEquiptment(id);
+
+            if (rs) return Ok();
+
+            return Conflict();
         }
 
 

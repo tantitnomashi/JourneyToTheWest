@@ -28,6 +28,25 @@ namespace JourneyToTheWest.Models.DAOs
                     .Where(x => x.Quantity > 0)
                     .ToList();
             }
+        } 
+        public List<Equipment> GetAvailbleEquipmentById(int id)
+        {
+
+            using (var db = new JOURNEYTOTHEWESTEntities())
+            {
+                return db.Equipments
+                    .Where(x => x.Id == id && x.Quantity > 0)
+                    .ToList();
+            }
+        }
+        public bool isAvailbleQuantity(int id, int quantity)
+        {
+            using (var db = new JOURNEYTOTHEWESTEntities())
+            {
+                return db.Equipments
+                    .Where(x => x.Id == id && x.Quantity >= quantity).SingleOrDefault() != null ? true :false;
+                   
+            }
         }
       
         public Equipment GetEquipmentById(int id)

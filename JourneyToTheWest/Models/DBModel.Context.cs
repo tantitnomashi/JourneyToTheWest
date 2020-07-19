@@ -18,6 +18,8 @@ namespace JourneyToTheWest.Models
         public JOURNEYTOTHEWESTEntities()
             : base("name=JOURNEYTOTHEWESTEntities")
         {
+            Configuration.LazyLoadingEnabled = false;
+           // Configuration.ProxyCreationEnabled = true;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
