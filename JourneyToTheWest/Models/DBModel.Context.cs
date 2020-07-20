@@ -19,9 +19,9 @@ namespace JourneyToTheWest.Models
             : base("name=JOURNEYTOTHEWESTEntities")
         {
             Configuration.LazyLoadingEnabled = false;
-           // Configuration.ProxyCreationEnabled = true;
+
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

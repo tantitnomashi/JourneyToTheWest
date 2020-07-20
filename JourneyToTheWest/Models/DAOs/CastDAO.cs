@@ -15,7 +15,7 @@ namespace JourneyToTheWest.Models.DAOs
             using (var db = new JOURNEYTOTHEWESTEntities())
             {
                 return db.Casts
-                        .Where(x => x.Username == username && x.Password == password)
+                        .Where(x => x.Username == username && x.Password == password && x.Role != 3)
                         .SingleOrDefault();
             }
         }
@@ -23,14 +23,13 @@ namespace JourneyToTheWest.Models.DAOs
         {
             using (var db = new JOURNEYTOTHEWESTEntities())
             {
-                return db.Casts.Select(x => x)
+                return db.Casts.Where(x => x.Role != 3).Select(x => x)
                     .ToList();
             }
         }
 
         public Cast GetCastById(string username)
         {
-
             using (var db = new JOURNEYTOTHEWESTEntities())
             {
                 return db.Casts
@@ -41,7 +40,6 @@ namespace JourneyToTheWest.Models.DAOs
 
         public List<Cast> GetCastByName(string name)
         {
-
             using (var db = new JOURNEYTOTHEWESTEntities())
             {
                 return db.Casts
@@ -101,15 +99,15 @@ namespace JourneyToTheWest.Models.DAOs
             {
                 try
                 {
-                    var cast = db.Casts
+                    Cast cast = db.Casts
                         .Where(x => x.Username == username)
                         .SingleOrDefault();
-
                     if (cast == null) return false;
-
-                    db.Casts.Remove(cast);
+                    // db.Casts.Remove(cast);
+                    cast.Role = 3;
+                    db.Casts.Attach(cast);
+                    db.Entry(cast).State = EntityState.Modified;
                     db.SaveChanges();
-
                     return true;
                 }
                 catch (Exception ex)

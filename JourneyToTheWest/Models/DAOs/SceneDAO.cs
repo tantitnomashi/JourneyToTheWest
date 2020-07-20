@@ -113,10 +113,11 @@ namespace JourneyToTheWest.Models.DAOs
             {
                 try
                 {
+                    new RecordHistoryDAO().DeleteBySceneId(id);
+                    new EquipmentUsingHistoryDAO().DeleteBySceneId(id);
                     var scene = db.Scenes
                         .Where(x => x.Id == id)
                         .SingleOrDefault();
-
                     if (scene == null) return false;
 
                     db.Scenes.Remove(scene);

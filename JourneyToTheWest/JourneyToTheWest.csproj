@@ -142,6 +142,7 @@
     <Compile Include="Models\DAOs\AdminDAO.cs" />
     <Compile Include="Models\DAOs\CastDAO.cs" />
     <Compile Include="Models\DAOs\EquipmentDAO.cs" />
+    <Compile Include="Models\DAOs\EquipmentUsingHistoryDAO.cs" />
     <Compile Include="Models\DAOs\ImpersonationDAO.cs" />
     <Compile Include="Models\DAOs\RecordHistoryDAO.cs" />
     <Compile Include="Models\DAOs\SceneDAO.cs" />

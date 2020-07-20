@@ -149,6 +149,7 @@ namespace JourneyToTheWest.Models.DAOs
             {
                 try
                 {
+                    new EquipmentUsingHistoryDAO().DeleteByEquipmentId(id);
                     var equipment = db.Equipments
                         .Where(x => x.Id == id)
                         .SingleOrDefault();

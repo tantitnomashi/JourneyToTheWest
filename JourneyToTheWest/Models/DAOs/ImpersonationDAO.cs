@@ -87,6 +87,7 @@ namespace JourneyToTheWest.Models.DAOs
             {
                 try
                 {
+                    new RecordHistoryDAO().DeleteByImperId(id);
                     var impersonation = db.Impersonations
                         .Where(x => x.Id == id)
                         .SingleOrDefault();
