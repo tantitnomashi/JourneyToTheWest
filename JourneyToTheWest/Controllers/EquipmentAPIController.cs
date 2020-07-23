@@ -35,10 +35,17 @@ namespace JourneyToTheWest.Controllers
         [HttpGet]
         public IHttpActionResult CheckQuantityAvailble(int id, int quantity)
         {
+            string messError = "";
             bool rs = new EquipmentDAO().isAvailbleQuantity( id,  quantity);
+            Equipment e = new EquipmentDAO().GetEquipmentById(id);
+            if(e != null)
+            {
+                messError = " Only " + e.Quantity + " items left in stock!";
+            }
             if (rs) return Ok();
 
-            return Conflict();
+
+            return Content(HttpStatusCode.Conflict, messError);
         }
 
 

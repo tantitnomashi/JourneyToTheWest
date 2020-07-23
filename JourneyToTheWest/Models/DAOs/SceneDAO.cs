@@ -41,12 +41,12 @@ namespace JourneyToTheWest.Models.DAOs
         public List<Scene> GetSceneByDate(DateTime date, DateTime dateTo)
         {
             
-          //  DateTime tomorrow = date.AddDays(1);
+               //  DateTime tomorrow = date.AddDays(1);
            
                 using (var entity = new JOURNEYTOTHEWESTEntities())
                 {
-                    return entity.Scenes.Where(x => x.StartTime >= date)
-                        .Where(x => x.EndTime < dateTo).ToList();
+                    return entity.Scenes.Where(x => x.StartTime <= date)
+                        .Where(x => x.EndTime >= dateTo).ToList();
 
                 }
            

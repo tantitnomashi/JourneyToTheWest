@@ -125,6 +125,7 @@
     <Compile Include="Controllers\CastAPIController.cs" />
     <Compile Include="Controllers\DemoAPIController.cs" />
     <Compile Include="Controllers\EquipmentAPIController.cs" />
+    <Compile Include="Controllers\EquipmentUsingHistoryController.cs" />
     <Compile Include="Controllers\ImpersonationAPIController.cs" />
     <Compile Include="Controllers\RecordHistoryAPIController.cs" />
     <Compile Include="Controllers\SceneAPIController.cs" />
